@@ -82,7 +82,13 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         /// </summary>
         private DrawingImage imageSource;
 
-        private int contador = 0;
+        private float oldHeadY;
+        private bool position0Done;
+        private bool position1Done;
+        private bool position2Done;
+        private bool position3Done;
+        private bool position4Done;
+
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
@@ -90,6 +96,13 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         public MainWindow()
         {
             InitializeComponent();
+
+            oldHeadY = 0;
+            position0Done = true;
+            position1Done = false;
+            position2Done = false;
+            position3Done = false;
+            position4Done = false;
         }
 
         /// <summary>
@@ -208,7 +221,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             Skeleton[] skeletons = new Skeleton[0];
            
-            contador++;
+            
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
             {
                 if (skeletonFrame != null)
@@ -387,14 +400,123 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private void CheckForm(Skeleton skeleton)
         {
             //Check if in front of the camera
-            this.CheckPosition(skeleton);
+            // this.CheckPosition(skeleton);
 
+            Console.WriteLine("oldHeadY " + oldHeadY + " newHeadY " + skeleton.Joints[JointType.Head].Position.Y);
+
+            Console.WriteLine("HipCenter " + skeleton.Joints[JointType.HipCenter].Position.Y + " HipLeft " + skeleton.Joints[JointType.HipLeft].Position.Y + " KneeLeft " + skeleton.Joints[JointType.KneeLeft].Position.Y);
+
+            if (position0Done)
+            {
+                //Detect end position1
+                if (position1Done)
+                {
+                    Console.WriteLine("Posición 1 Terminada");
+
+                    //Check for position2Done              
+
+                    if (position2Done)
+                    {
+                        Console.WriteLine("Posicion 2 terminada");
+
+                        if (position3Done)
+                        {
+                            Console.WriteLine("Position 3 done");
+
+                            if (position4Done)
+                            {
+                                Console.WriteLine("Position 4 done");
+                            }
+                            else
+                            {
+                                position4Done = Math.Abs(oldHeadY - skeleton.Joints[JointType.Head].Position.Y) < 0.05;
+                            }
+
+                        }
+                        else
+                        {
+                            bool cond1 = Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y) > 0.05;
+                            bool cond2 = Math.Abs(skeleton.Joints[JointType.HipRight].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y) > 0.05;
+                            bool cond3 = skeleton.Joints[JointType.HipLeft].Position.Y > skeleton.Joints[JointType.KneeLeft].Position.Y;
+
+                            position3Done = cond1 && cond2 && cond3;
+                        }
+
+                    }
+                    else
+                    {
+                        bool cond1 = Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y) < 0.05;
+                        bool cond2 = Math.Abs(skeleton.Joints[JointType.HipRight].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y) < 0.05;
+
+                        position2Done = cond1 && cond2;
+
+                        //Check form for position2
+                        this.Position2Cond1(skeleton);
+
+                    }
+
+                }
+                else
+                {
+                    if (oldHeadY != 0)
+                    {
+                        if (Math.Abs(oldHeadY - skeleton.Joints[JointType.Head].Position.Y) > 0.1)
+                        {
+                            position1Done = true;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                    else
+                    {
+                        oldHeadY = skeleton.Joints[JointType.Head].Position.Y;
+                    }
+
+                    //Check form of position 1
+
+                    //this.Position1Cond1(skeleton);
+
+                }
+            }
+            else
+            {
+                
+
+            }
+
+            
+
+
+
+
+
+        }
+
+        private void CheckPosition(Skeleton skeleton)
+        {
+            if (Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z) < 0.03)
+            {
+                Console.WriteLine("You're doing great!Hip Left: " + skeleton.Joints[JointType.HipLeft].Position.Z + " Hip Right: " + skeleton.Joints[JointType.HipRight].Position.Z);
+                statusBarText.Text = "Genial!";
+            }
+            else
+            {
+                Console.WriteLine("Hip Left: " + skeleton.Joints[JointType.HipLeft].Position.Z + " Hip Right: " + skeleton.Joints[JointType.HipRight].Position.Z);
+                statusBarText.Text = "Hip Left: " + skeleton.Joints[JointType.HipLeft].Position.Z + " Hip Right: " + skeleton.Joints[JointType.HipRight].Position.Z;
+            }
+        }
+
+        //Todo recto
+        private void Position1Cond1(Skeleton skeleton)
+        {
             var cond1 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderLeft].Position.Z) < 0.1;
             var cond2 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.KneeLeft].Position.Z) < 0.1;
             var cond3 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleLeft].Position.Z) < 0.1;
-            var cond4= (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderRight].Position.Z) < 0.1;
-            var cond5= (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z) < 0.1;
-            var cond6= (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleRight].Position.Z) < 0.1;
+            var cond4 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderRight].Position.Z) < 0.1;
+            var cond5 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z) < 0.1;
+            var cond6 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleRight].Position.Z) < 0.1;
 
             if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6)
             {
@@ -427,24 +549,16 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                     Console.WriteLine("AnkleRight");
                 }
             }
-
-           
-
-            
         }
 
-        private void CheckPosition(Skeleton skeleton)
+        private void Position2Cond1(Skeleton skeleton)
         {
-            if (Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z) < 0.03)
-            {
-                Console.WriteLine("You're doing great!Hip Left: " + skeleton.Joints[JointType.HipLeft].Position.Z + " Hip Right: " + skeleton.Joints[JointType.HipRight].Position.Z);
-                statusBarText.Text = "Genial!";
-            }
-            else
-            {
-                Console.WriteLine("Hip Left: " + skeleton.Joints[JointType.HipLeft].Position.Z + " Hip Right: " + skeleton.Joints[JointType.HipRight].Position.Z);
-                statusBarText.Text = "Hip Left: " + skeleton.Joints[JointType.HipLeft].Position.Z + " Hip Right: " + skeleton.Joints[JointType.HipRight].Position.Z;
-            }
+            var cond1 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderCenter].Position.Z) > 0.1;
+            var cond2 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleLeft].Position.Z) > 0.1;
+
+            Console.WriteLine("HipCenter " + skeleton.Joints[JointType.HipCenter].Position.Z + " ShoulderCenter " + skeleton.Joints[JointType.ShoulderCenter].Position.Z);
         }
     }
+
+   
 }

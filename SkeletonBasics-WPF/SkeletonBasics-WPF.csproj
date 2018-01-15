@@ -75,6 +75,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Modules\FSM.cs" />
+    <Compile Include="Modules\IState.cs" />
+    <Compile Include="Modules\Squad\SquadFSM.cs" />
+    <Compile Include="Modules\Squad\States\State0.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -107,6 +111,7 @@
     <Resource Include="Images\UncheckedHover.png" />
     <Resource Include="Images\UncheckedNormal.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
