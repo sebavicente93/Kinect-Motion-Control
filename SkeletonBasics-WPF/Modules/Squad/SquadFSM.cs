@@ -15,7 +15,15 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad
 
         private void initFSM()
         {
-            this.activeState = new State0(0);
+            this.states = new IState[]{
+                new State0(),
+                new State1(),
+                new State2(),
+                new State3(),
+                new State4()
+            };
+
+            this.activeState = this.states[0];
         }
 
     }

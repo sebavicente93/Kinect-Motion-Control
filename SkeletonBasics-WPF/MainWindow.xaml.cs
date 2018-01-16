@@ -11,6 +11,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     using System.Windows;
     using System.Windows.Media;
     using Microsoft.Kinect;
+    using Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -89,12 +90,14 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private bool position3Done;
         private bool position4Done;
 
+        private SquadFSM mySquadFSM;
 
         /// <summary>
         /// Initializes a new instance of the MainWindow class.
         /// </summary>
         public MainWindow()
         {
+           
             InitializeComponent();
 
             oldHeadY = 0;
@@ -103,6 +106,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             position2Done = false;
             position3Done = false;
             position4Done = false;
+            mySquadFSM = new SquadFSM(); 
         }
 
         /// <summary>
@@ -324,7 +328,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 }
             }
 
-            this.CheckForm(skeleton);
+            mySquadFSM.Update(skeleton);
+            //this.CheckForm(skeleton);
         }
 
         /// <summary>
@@ -401,6 +406,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         {
             //Check if in front of the camera
             // this.CheckPosition(skeleton);
+
+            
 
             Console.WriteLine("oldHeadY " + oldHeadY + " newHeadY " + skeleton.Joints[JointType.Head].Position.Y);
 

@@ -6,13 +6,13 @@ using Microsoft.Kinect;
 
 namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
 {
-    class State0 : IState
+    class State1 : IState
     {
         public int Id { get; }
 
-        public State0()
+        public State1()
         {
-            this.Id = 0;
+            this.Id = 1;
         }
 
         public int Update(Skeleton skeleton)
