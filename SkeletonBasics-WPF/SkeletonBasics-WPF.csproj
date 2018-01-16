@@ -78,6 +78,10 @@
     <Compile Include="Modules\FSM.cs" />
     <Compile Include="Modules\IState.cs" />
     <Compile Include="Modules\Squad\SquadFSM.cs" />
+    <Compile Include="Modules\Squad\States\State4.cs" />
+    <Compile Include="Modules\Squad\States\State3.cs" />
+    <Compile Include="Modules\Squad\States\State2.cs" />
+    <Compile Include="Modules\Squad\States\State1.cs" />
     <Compile Include="Modules\Squad\States\State0.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

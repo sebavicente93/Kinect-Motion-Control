@@ -13,11 +13,12 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules
 
         public void Update(Skeleton skeleton)
         {
+            Console.WriteLine($"Active State {this.activeState.Id}");
             int newState= this.activeState.Update(skeleton);
-
+            
             if (newState != -1)
             {
-                activeState = states[newState];
+                this.activeState = this.states[newState];
             }
         }
     }
