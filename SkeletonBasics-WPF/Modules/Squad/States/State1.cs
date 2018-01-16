@@ -24,7 +24,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
             var cond3 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleLeft].Position.Z) < 0.1;
             var cond4 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderRight].Position.Z) < 0.1;
             var cond5 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.KneeRight].Position.Z) < 0.1;
-            var cond6 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleRight].Position.Z) < 0.1;
+            var cond6 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleRight].Position.Z) < 0.1; 
 
             if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6)
             {
