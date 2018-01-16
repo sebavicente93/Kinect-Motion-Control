@@ -405,6 +405,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
         private void CheckForm(Skeleton skeleton)
         {           
 
+            
+
             Console.WriteLine("oldHeadY " + oldHeadY + " newHeadY " + skeleton.Joints[JointType.Head].Position.Y);
 
             Console.WriteLine("HipCenter " + skeleton.Joints[JointType.HipCenter].Position.Y + " HipLeft " + skeleton.Joints[JointType.HipLeft].Position.Y + " KneeLeft " + skeleton.Joints[JointType.KneeLeft].Position.Y);
