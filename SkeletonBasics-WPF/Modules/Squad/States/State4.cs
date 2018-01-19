@@ -17,12 +17,21 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
 
         public int Update(Skeleton skeleton)
         {
-            if (Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z) < 0.03)
+            //check that the body is straight. Same Z and X
+            bool cond1= (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderCenter].Position.Z) < 0.05;
+            bool cond2 = (skeleton.Joints[JointType.KneeLeft].Position.Z - skeleton.Joints[JointType.ShoulderCenter].Position.Z) < 0.1;
+            bool cond3 = (skeleton.Joints[JointType.HipCenter].Position.X - skeleton.Joints[JointType.ShoulderCenter].Position.X) < 0.05;
+
+
+            if (cond1 && cond2 && cond3)
             {
                 return 1;
             }
             else
             {
+                //Check that the column is always straight
+
+
                 return -1;
             }
         }
