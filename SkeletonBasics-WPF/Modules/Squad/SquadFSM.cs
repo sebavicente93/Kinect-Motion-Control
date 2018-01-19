@@ -1,8 +1,11 @@
-﻿using Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States;
+﻿using Microsoft.Kinect;
+using Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
+using Microsoft.Samples.Kinect.SkeletonBasics.Modules.Utilities;
 
 namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad
 {
@@ -24,6 +27,25 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad
             };
 
             this.activeState = this.states[0];
+        }
+
+        public override void Update(Skeleton skeleton)
+        {
+            base.Update(skeleton);
+            var Spine = new PointF(skeleton.Joints[JointType.Spine].Position.Y, skeleton.Joints[JointType.Spine].Position.Z);
+            var Hip = new PointF(skeleton.Joints[JointType.HipCenter].Position.Y, skeleton.Joints[JointType.HipCenter].Position.Z);
+            var ShoulderCenter = new PointF(skeleton.Joints[JointType.ShoulderCenter].Position.Y, skeleton.Joints[JointType.ShoulderCenter].Position.Z);
+
+            var distance = MathUtility.DistanceFromPointToLine(Spine, Hip, ShoulderCenter);
+
+            if (distance > 0.05)
+            {
+                Console.WriteLine("Ponete derecho bobo");
+            }else
+            {
+                Console.WriteLine("Todo piola");
+            }
+
         }
 
     }

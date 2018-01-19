@@ -11,9 +11,9 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules
         protected IState[] states;
         protected IState activeState;
 
-        public void Update(Skeleton skeleton)
+        public virtual void Update(Skeleton skeleton) 
         {
-            Console.WriteLine($"Active State {this.activeState.Id}");
+           // Console.WriteLine($"Active State {this.activeState.Id}");
             int newState= this.activeState.Update(skeleton);
             
             if (newState != -1)

@@ -43,7 +43,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
                     Console.WriteLine("Mantene el eje vertical mientras desciendas");
                     return 3;
                 }
-
+                /*
                 if (!cond1)
                 {
                     Console.WriteLine("KneeLeft");
@@ -59,7 +59,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
                 if (!cond4)
                 {
                     Console.WriteLine("AnkleRight");
-                }
+                }*/
             }
 
             return -1;

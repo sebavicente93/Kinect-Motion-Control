@@ -25,8 +25,6 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
             bool cond3 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderCenter].Position.Z) > 0.1;
             bool cond4 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleLeft].Position.Z) > 0.1;
 
-            Console.WriteLine("HipCenter " + skeleton.Joints[JointType.HipCenter].Position.Z + " ShoulderCenter " + skeleton.Joints[JointType.ShoulderCenter].Position.Z);
-
             if (cond3 && cond4)
             {
                 if (cond1 && cond2)
