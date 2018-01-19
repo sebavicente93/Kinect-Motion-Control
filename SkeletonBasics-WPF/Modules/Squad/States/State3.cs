@@ -20,11 +20,22 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
             //Condicion de corte posicion mas baja del ejercicio
             bool cond1 = Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Y - skeleton.Joints[JointType.KneeLeft].Position.Y) < 0.05;
             bool cond2 = Math.Abs(skeleton.Joints[JointType.HipRight].Position.Y - skeleton.Joints[JointType.KneeRight].Position.Y) < 0.05;
-            var cond1 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderCenter].Position.Z) > 0.1;
-            var cond2 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleLeft].Position.Z) > 0.1;
+            
+            // Condicion que se debe cumplir mientras bajo!!
+            bool cond3 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.ShoulderCenter].Position.Z) > 0.1;
+            bool cond4 = (skeleton.Joints[JointType.HipCenter].Position.Z - skeleton.Joints[JointType.AnkleLeft].Position.Z) > 0.1;
 
             Console.WriteLine("HipCenter " + skeleton.Joints[JointType.HipCenter].Position.Z + " ShoulderCenter " + skeleton.Joints[JointType.ShoulderCenter].Position.Z);
 
+            if (cond3 && cond4)
+            {
+                if (cond1 && cond2)
+                {
+                    return 4;
+                }
+            }
+
+            return -1;
         }
     }
 }
