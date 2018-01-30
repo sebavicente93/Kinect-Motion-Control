@@ -6,7 +6,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
     class State3 : IState
     {
         public int Id { get; }
-
+        // Estado que representa la parte mas baja del descenso
         public State3()
         {
             this.Id = 3;
@@ -28,9 +28,21 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
                 {
                     return 4;
                 }
+                else
+                {
+                    this.Notify("Bajá un poquito más");
+                }
+            }else
+            {
+                this.Notify("Tirá la cadera para atras cuando bajas");
             }
 
             return -1;
+        }
+
+        private void Notify(String mensaje)
+        {
+            Console.WriteLine(mensaje);
         }
     }
 }

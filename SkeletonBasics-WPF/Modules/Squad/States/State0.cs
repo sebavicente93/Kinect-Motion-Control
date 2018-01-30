@@ -7,6 +7,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
     {
         public int Id { get; }
 
+        //Estado que chequea que el usuario este frente a la cámara.
+
         public State0()
         {
             this.Id = 0;
@@ -16,12 +18,18 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
         {
             if (Math.Abs(skeleton.Joints[JointType.HipLeft].Position.Z - skeleton.Joints[JointType.HipRight].Position.Z) < 0.03)
             {
+                this.Notify("Listos para empezar");
                 return 1;
             }
             else
             {
                 return -1;
             }
+        }
+
+        private void Notify(String mensaje)
+        {
+            Console.WriteLine(mensaje);
         }
     }
 }

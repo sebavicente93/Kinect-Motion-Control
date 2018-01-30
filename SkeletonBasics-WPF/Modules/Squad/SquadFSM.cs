@@ -32,18 +32,18 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad
         public override void Update(Skeleton skeleton)
         {
             base.Update(skeleton);
-            var Spine = new PointF(skeleton.Joints[JointType.Spine].Position.Y, skeleton.Joints[JointType.Spine].Position.Z);
-            var Hip = new PointF(skeleton.Joints[JointType.HipCenter].Position.Y, skeleton.Joints[JointType.HipCenter].Position.Z);
             var ShoulderCenter = new PointF(skeleton.Joints[JointType.ShoulderCenter].Position.Y, skeleton.Joints[JointType.ShoulderCenter].Position.Z);
+            var Hip = new PointF(skeleton.Joints[JointType.HipCenter].Position.Y, skeleton.Joints[JointType.HipCenter].Position.Z);
+            var Spine = new PointF(skeleton.Joints[JointType.Spine].Position.Y, skeleton.Joints[JointType.Spine].Position.Z);
 
             var distance = MathUtility.DistanceFromPointToLine(Spine, Hip, ShoulderCenter);
 
-            if (distance > 0.05)
+            if (distance > 0.1)
             {
-                Console.WriteLine("Ponete derecho bobo");
+                Console.WriteLine($"Ponete derecho bobo {distance} ShoulderCenter: {ShoulderCenter.X} {ShoulderCenter.Y}");
             }else
             {
-                Console.WriteLine("Todo piola");
+                Console.WriteLine($"Todo piola {distance}");
             }
 
         }
