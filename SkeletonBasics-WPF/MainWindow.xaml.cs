@@ -329,6 +329,8 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
                 }
             }
 
+            this.DrawLine(skeleton, drawingContext, JointType.HipCenter, JointType.ShoulderCenter);
+
             mySquadFSM.Update(skeleton);
             //this.CheckForm(skeleton);
         }
@@ -548,7 +550,15 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
 
             Console.WriteLine("HipCenter " + skeleton.Joints[JointType.HipCenter].Position.Z + " ShoulderCenter " + skeleton.Joints[JointType.ShoulderCenter].Position.Z);
         }
-    }
 
-   
+        private void DrawLine(Skeleton skeleton, DrawingContext drawingContext, JointType jointType0, JointType jointType1)
+        {
+            Joint joint0 = skeleton.Joints[jointType0];
+            Joint joint1 = skeleton.Joints[jointType1];
+
+            Pen drawPen = new Pen(Brushes.Red, 0.5); 
+
+            drawingContext.DrawLine(drawPen, this.SkeletonPointToScreen(joint0.Position), this.SkeletonPointToScreen(joint1.Position));
+        }
+    }
 }

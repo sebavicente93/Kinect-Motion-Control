@@ -9,7 +9,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
     class State1 : IState
     {
         public int Id { get; }
-
+        //Estado que chequea que esté parado derecho
         public State1()
         {
             this.Id = 1;
@@ -25,38 +25,18 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
 
             if (cond1 && cond2 && cond3 && cond5 && cond6)
             {
-                Console.WriteLine("Todo perfecto!");
-                return 2;
+                 return 2;
             }
             else
             {
-             /*   if (!cond1)
-                {
-                    Console.WriteLine("ShoulderLeft");
-                }
-                if (!cond2)
-                {
-                    Console.WriteLine("KneeLeft");
-                }
-                if (!cond3)
-                {
-                    Console.WriteLine("AnkleLeft");
-                }
-                if (!cond4)
-                {
-                    Console.WriteLine("ShoulderRight");
-                }
-                if (!cond5)
-                {
-                    Console.WriteLine("KneeRight");
-                }
-                if (!cond6)
-                {
-                    Console.WriteLine("AnkleRight");
-                }*/
-
+                this.Notify("Ponete derecho");
                 return -1;
             }
+        }
+
+        private void Notify(String mensaje)
+        {
+            Console.WriteLine(mensaje);
         }
     }
 }

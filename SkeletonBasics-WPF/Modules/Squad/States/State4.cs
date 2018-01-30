@@ -9,7 +9,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
     class State4 : IState
     {
         public int Id { get; }
-
+        // Estado de ascenso y vuelve a la posición inicial
         public State4()
         {
             this.Id = 4;
@@ -29,11 +29,14 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
             }
             else
             {
-                //Check that the column is always straight
-
-
+                this.Notify("Subí un poco mas");
                 return -1;
             }
+        }
+
+        private void Notify(String mensaje)
+        {
+            Console.WriteLine(mensaje);
         }
     }
 }

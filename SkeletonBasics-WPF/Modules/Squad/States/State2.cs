@@ -10,7 +10,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
     {
         public int Id { get; }
         private float oldHeadY;
-
+        // Estado que representa que la persona está en la posicion de descenso
         public State2()
         {
             this.Id = 2;
@@ -32,37 +32,25 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad.States
 
             if (cond1 && cond2 && cond3 && cond4 && goDownY)
             {
-                Console.WriteLine("Todo perfecto!");
-                return 3;             
+                  return 3;             
             }
             else
             {
                 if (goDownY)
                 {
                     // Cambia de estado pero con una advertencia
-                    Console.WriteLine("Mantene el eje vertical mientras desciendas");
+                   this.Notify("Mantene el eje vertical mientras desciendas");
                     return 3;
                 }
-                /*
-                if (!cond1)
-                {
-                    Console.WriteLine("KneeLeft");
-                }
-                if (!cond2)
-                {
-                    Console.WriteLine("AnkleLeft");
-                }
-                if (!cond3)
-                {
-                    Console.WriteLine("KneeRight");
-                }
-                if (!cond4)
-                {
-                    Console.WriteLine("AnkleRight");
-                }*/
+                
             }
 
             return -1;
+        }
+
+        private void Notify(String mensaje)
+        {
+            Console.WriteLine(mensaje);
         }
     }
 }
