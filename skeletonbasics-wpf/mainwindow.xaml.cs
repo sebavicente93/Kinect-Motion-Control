@@ -12,6 +12,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
     using System.Windows.Media;
     using Microsoft.Kinect;
     using Microsoft.Samples.Kinect.SkeletonBasics.Modules.Squad;
+    using Modules.Utilities;
 
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -106,7 +107,7 @@ namespace Microsoft.Samples.Kinect.SkeletonBasics
             position2Done = false;
             position3Done = false;
             position4Done = false;
-            mySquadFSM = new SquadFSM(); 
+            mySquadFSM = new SquadFSM();
         }
 
         /// <summary>
